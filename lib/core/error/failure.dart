@@ -14,3 +14,4 @@ final class NetworkFailure extends Failure {
     super.message = 'Não foi possível conectar ao servidor.',
   ]);
 }
+

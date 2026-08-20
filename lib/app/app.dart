@@ -3,14 +3,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../core/config/app_config.dart';
 import '../core/di/injection.dart';
+import '../core/router/app_router.dart';
+import '../core/router/app_routes.dart';
 import '../features/home/presentation/bloc/home_bloc.dart';
 import '../features/home/presentation/bloc/home_event.dart';
 import '../theme/app_colors.dart';
 
 class NatyApp extends StatelessWidget {
-  const NatyApp({required this.config, super.key});
+  const NatyApp({required this.config, required this.router, super.key});
 
   final AppConfig config;
+  final AppRouter router;
 
   @override
   Widget build(BuildContext context) {
@@ -28,19 +31,10 @@ class NatyApp extends StatelessWidget {
           useMaterial3: true,
         ),
         themeMode: ThemeMode.system,
-        home: const _AppHomeShell(),
+        initialRoute: AppRoute.home.path,
+        onGenerateRoute: router.generateRoute,
+        onUnknownRoute: router.generateUnknownRoute,
       ),
     );
-  }
-}
-
-class _AppHomeShell extends StatelessWidget {
-  const _AppHomeShell();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Scaffold(body: MaterialApp(
-      home: AppBarTheme(child:Text("theo gay"),),
-    ));
   }
 }
